@@ -1,0 +1,35 @@
+GET http://localhost:5080/api/Person
+
+
+GET http://localhost:5080/api/Address
+
+
+###
+GET http://localhost:5080/api/Person/1
+
+
+###
+POST http://localhost:5080/api/Person
+Content-Type: application/json
+
+    {
+        "id": 0,
+        "FirstName": "xxxx",
+        "LastName": "yyyyy",
+        "CreatedAt": "2023-11-07",
+        "UpdatedAt": "2023-11-07"
+    }
+
+
+PUT http://localhost:5080/api/Person/1
+Content-Type: application/json
+
+{
+  "id": 0,
+  "firstName": "TTTTT",
+  "lastName": "yyyyy",
+  "CreatedAt": "2023-11-08",
+  "UpdatedAt": "2023-11-08"
+}
+
+DELETE http://localhost:5080/api/Person/12
