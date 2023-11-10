@@ -20,7 +20,6 @@ namespace crudapp.Controllers
             _configuration = congig;
             _jwtservice = jwtsrv;
         }
-
         
         [HttpPost("/login")]
         public IActionResult login(LoginModel user)
