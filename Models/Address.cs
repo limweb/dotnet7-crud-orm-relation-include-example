@@ -23,6 +23,5 @@ public partial class Address
 
     public string UpdatedAt { get; set; } = null!;
 
-    public Person  Person { get; set; } = null!;
-
+    public virtual Person Person { get; set; } = null!;
 }

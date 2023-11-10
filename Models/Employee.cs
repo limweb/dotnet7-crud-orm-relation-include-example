@@ -1,16 +1,17 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace crudapp.Models
+namespace crudapp.Models;
+
+public partial class Employee
 {
-    public class Employee
-    {
-        public int Id { get; set; }
-        public string? FirstName { get; set; }
-        public string? LastName { get; set; }
-        public string? Email { get; set; }
-        public decimal Salary { get; set; }
-    }
+    public long Id { get; set; }
+
+    public string? FirstName { get; set; }
+
+    public string? LastName { get; set; }
+
+    public string? Email { get; set; }
+
+    public string Salary { get; set; } = null!;
 }

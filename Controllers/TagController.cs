@@ -5,31 +5,27 @@ using System.Linq;
 using System.Threading.Tasks;
 using crudapp.DB;
 using crudapp.Models;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace API.Controllers
+namespace crudapp.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class PersonController : ControllerBase
+    public class TagController : ControllerBase
     {
         private readonly DataContext _context;
 
-        public PersonController(DataContext context)
+        public TagController(DataContext context)
         {
             _context = context;
         }
 
         [HttpGet]
-        [Authorize]
         public async Task<IActionResult> GetAll()
         {
             try {         
-                var datas = await _context.Persons.
-                        Include(p=>p.Addresses)
-                        .ToListAsync();
+                var datas = await _context.Tags.Include(t=>t.Articles).ToListAsync();
                 return Ok(new  {
                     success = true,
                     status = 1,
@@ -42,7 +38,7 @@ namespace API.Controllers
                 {
                     status = 0,
                     success = false,
-                    datas = new List<Person>(),
+                    datas = new List<Tag>(),
                     message = ex.Message
                 });
             }
@@ -53,8 +49,8 @@ namespace API.Controllers
         {
             try {         
                 if (id == 0) { throw new Exception("0 is an invalid ID"); }
-                var datas = await  _context.Persons.FindAsync(id);
-                if (datas == null) { throw new Exception($"No Person was found with the ID: {id}"); }
+                var datas = await  _context.Tags.FindAsync(id);
+                if (datas == null) { throw new Exception($"No Tag was found with the ID: {id}"); }
                 return Ok(new  {
                     success = true,
                     status = 1,
@@ -74,13 +70,13 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Person model)
+        public async Task<IActionResult> Create(Tag model)
         {
             try {        
                 if (model == null){
                     throw new Exception("Please enter valid information");
                 }else{
-                    await _context.Persons.AddAsync(model);
+                    await _context.Tags.AddAsync(model);
                     await _context.SaveChangesAsync();
                     return Ok(new  {
                         success = true,
@@ -105,9 +101,9 @@ namespace API.Controllers
         {
             try {         
                 if (id == 0) { throw new Exception("0 is an invalid ID"); }
-                var data = await _context.Persons.FindAsync(id);
-                if (data == null) { throw new Exception($"No Person was found with the ID: {id}"); }
-                _context.Persons.Remove(data);
+                var data = await _context.Tags.FindAsync(id);
+                if (data == null) { throw new Exception($"No Tag was found with the ID: {id}"); }
+                _context.Tags.Remove(data);
                 await _context.SaveChangesAsync();
                 return Ok(new  {
                     success = true,
@@ -129,21 +125,21 @@ namespace API.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, Person model)
+        public async Task<IActionResult> Update(int id, Tag model)
         {
             if (id == 0)
             {
                 return BadRequest("0 is an invalid ID");
             }
 
-            var PersonToUpdate = await _context.Persons.FindAsync(id);
+            var TagToUpdate = await _context.Tags.FindAsync(id);
 
-            if (PersonToUpdate != null)
+            if (TagToUpdate != null)
             {
                 //------  your code for Update--------------
                 //Map the properties from the recieved model
                 //to the model that we want to upadte.
-                //PersonToUpdate.xxxxx = model.FirstName;
+                //TagToUpdate.xxxxx = model.FirstName;
 
                 await _context.SaveChangesAsync();
 
@@ -151,7 +147,7 @@ namespace API.Controllers
             }
             else
             {
-                return NotFound($"No Person was found with the ID: {id}"); //Return 404 Status Code
+                return NotFound($"No Tag was found with the ID: {id}"); //Return 404 Status Code
             }
         }
 

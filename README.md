@@ -7,6 +7,7 @@
 //TODO
 1. snippet
 2. codegen database firest
+   1. dotnet ef dbcontext scaffold "DataSource=MainDb.db" Microsoft.EntityFrameworkCore.Sqlite -o Models --context-dir DB -c DataContext  --force
 3. Jwt auth
 4. Upload File
 5. get List file

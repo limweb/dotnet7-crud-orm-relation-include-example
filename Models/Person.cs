@@ -15,5 +15,5 @@ public partial class Person
 
     public string UpdatedAt { get; set; } = null!;
 
-    public List<Address> Addresses { get; set; } = new List<Address>();
+    public virtual ICollection<Address> Addresses { get; set; } = new List<Address>();
 }
