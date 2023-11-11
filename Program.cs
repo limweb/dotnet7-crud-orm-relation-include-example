@@ -64,19 +64,19 @@ app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
-app.MapGet("/", () => "Hello");
-app.MapGet("/auth", [Authorize] (HttpContext context) =>
-{
-    var id = context.User.FindFirst("id")?.Value; 
-    var n = context.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-    var gn = context.User.FindFirst(ClaimTypes.GivenName)?.Value;
-    var sn = context.User.FindFirst(ClaimTypes.Surname)?.Value;
-    return Results.Ok($"Authenticated: {id}:{n}:{gn}:{sn}") ;
+app.MapGet("/", () => "dotnet Api v.0.0.1");
+// app.MapGet("/auth", [Authorize] (HttpContext context) =>
+// {
+//     var id = context.User.FindFirst("id")?.Value; 
+//     var n = context.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+//     var gn = context.User.FindFirst(ClaimTypes.GivenName)?.Value;
+//     var sn = context.User.FindFirst(ClaimTypes.Surname)?.Value;
+//     return Results.Ok($"Authenticated: {id}:{n}:{gn}:{sn}") ;
 
-});
-app.MapGet("/admin1", [Authorize(Roles = "admin")] () => "Administrator");
-app.MapGet("/dev1", [Authorize(Roles = "dev")] () => "Developer");
-app.MapGet("/dev2", [Authorize(Roles = "admin,dev")] () => "Administrator or Developer");
+// });
+// app.MapGet("/admin1", [Authorize(Roles = "admin")] () => "Administrator");
+// app.MapGet("/dev1", [Authorize(Roles = "dev")] () => "Developer");
+// app.MapGet("/dev2", [Authorize(Roles = "admin,dev")] () => "Administrator or Developer");
 /*
 app.MapPost("/login", [AllowAnonymous] (LoginModel  user) =>
 {
