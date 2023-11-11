@@ -1,10 +1,7 @@
-using System.Collections;
-using crudapp.DB;
 using crudapp.Dto;
 using crudapp.Dto.Response;
+using crudapp.DB;
 using crudapp.Models;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace crudapp.Services;
@@ -81,36 +78,37 @@ namespace crudapp.Services;
            return await _context.Articles.AnyAsync(x => x.Id == id);
        }
 
-        public async Task<PageResponseDto> vuetable(PageDto page){
-            try
-            {
-                var qry =  _context.Articles;
-                int  total = await qry.CountAsync();
-                
-                // var datas = await _context.Articles.Include(u=>u.Roles)
-                var datas = await qry
-                .Skip((page.Current_page - 1) * page.PageSize)
-                .Take(page.PageSize)
-                .ToListAsync();
-
-                return new PageResponseDto { 
-                    status = 1,
-                    success= true,
-                    message = "succexxxxss",
-                    datas  = datas,
-                    total = total,
-                    perpage  = page.PageSize ,
-                    currentpage = page.Current_page,
-
-                    };
-            }  catch (System.Exception ex)   {
-                return new PageResponseDto{
-                    status = 0,
-                    success= false,
-                    message = ex.Message
-                };
-            }
-        }   
-
+ 
+        public async Task<PageResponseDto> vuetable(PageDto page){ 
+            try 
+            { 
+                var qry =  _context.Articles; 
+                int  total = await qry.CountAsync(); 
+                 
+                // var datas = await _context.Articles.Include(u=>u.Roles) 
+                var datas = await qry 
+                .Skip((page.Current_page - 1) * page.PageSize) 
+                .Take(page.PageSize) 
+                .ToListAsync(); 
+ 
+                return new PageResponseDto {  
+                    status = 1, 
+                    success= true, 
+                    message = "success", 
+                    datas  = datas, 
+                    total = total, 
+                    perpage  = page.PageSize , 
+                    currentpage = page.Current_page, 
+ 
+                    }; 
+            }  catch (System.Exception ex)   { 
+                return new PageResponseDto{ 
+                    status = 0, 
+                    success= false, 
+                    message = ex.Message 
+                }; 
+            } 
+        }    
+         
        
    }
