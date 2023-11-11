@@ -1,0 +1,3 @@
+# TestService
+
+GET http://localhost:5080/api/test

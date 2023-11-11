@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using crudapp.Core;
+using crudapp.Interface;
 
 namespace crudapp.Services
 {
@@ -40,7 +42,7 @@ namespace crudapp.Services
                 services.AddScoped(interfaces[0], repositoryType);
             }
 
-            // services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IJwtService, JwtService>();
         }
     }

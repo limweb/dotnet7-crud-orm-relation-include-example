@@ -3,7 +3,9 @@ using System.Reflection;
 using System.Security.Claims;
 using System.Text;
 using System.Text.Json.Serialization;
+using crudapp.Core;
 using crudapp.DB;
+using crudapp.Interface;
 using crudapp.Models;
 using crudapp.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -23,6 +25,11 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddRepositories(Assembly.GetExecutingAssembly());
+// builder.Services.AddScoped<IJwtService, JwtService>();
+
 builder.Services.AddSwaggerGen();
 builder.Services.AddAuthentication(options =>
 {
@@ -43,9 +50,6 @@ builder.Services.AddAuthentication(options =>
     };
 });
 builder.Services.AddAuthorization();
-
-builder.Services.AddRepositories(Assembly.GetExecutingAssembly());
-// builder.Services.AddScoped<IJwtService, JwtService>();
 
 var app = builder.Build();
 

@@ -6,9 +6,10 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using crudapp.Models;
+using crudapp.Services;
 using Microsoft.IdentityModel.Tokens;
 
-namespace crudapp.Services
+namespace crudapp.Core
 {
      public class JwtService : IJwtService
     {

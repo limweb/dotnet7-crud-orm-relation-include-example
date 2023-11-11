@@ -4,9 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using crudapp.DB;
 using crudapp.Models;
+using crudapp.Services;
 using Microsoft.EntityFrameworkCore;
 
-namespace crudapp.Services
+namespace crudapp.Core
 {
  public class RepositoryBase<T> : IRepositoryBase<T> where T : ModelBase
     {
