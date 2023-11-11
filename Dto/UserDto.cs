@@ -1,20 +1,18 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace API.Dto
+namespace crudapp.Models;
+
+public partial class UserDto
 {
-    public class UserDto
-    {
-        [Required]
-        public Guid Id { get; set; }
+    public long Id { get; set; }
 
-        [Required]
-        public String Name { get; set; }
+    public string? Name { get; set; }
 
-        [Required]
-        public String Email { get; set; }
-    }
+    public string? Username { get; set; }
+
+
+    public string? Email { get; set; }
+
+    public ICollection<Role> Roles { get; set; } = new List<Role>();
 }
