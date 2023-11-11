@@ -475,3 +475,5 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+MainDb.db-shm
+MainDb.db-wal
