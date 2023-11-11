@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using crudapp.DB;
+using crudapp.Dto;
 using crudapp.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -151,5 +152,42 @@ namespace crudapp.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("vuetable")]
+        public async Task<IActionResult> vuetable([FromQuery] PageDto page){
+            try
+            {
+                var qry =  _context.Users;
+                int  total = await qry.CountAsync();
+                
+                // var datas = await _context.Users.Include(u=>u.Roles)
+                var datas = await qry
+                .Include(u=>u.Roles)
+                .Skip((page.Current_page - 1) * page.PageSize)
+                .Take(page.PageSize)
+                .ToListAsync();
+
+                return Ok( new { 
+                    status = true,
+                    message = "success",
+                
+                    datas  = datas,
+
+                    // pagination
+                    total = total,
+                    perpage  = page.PageSize ,
+                    currentpage = page.Current_page,
+
+                    });
+            }  catch (System.Exception ex)   {
+                return BadRequest( new {
+                status = 0,
+                success= false,
+                message = ex.Message
+                });
+            }
+        }   
+
     }
+
 }

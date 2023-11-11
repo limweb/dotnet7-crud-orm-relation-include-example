@@ -15,5 +15,6 @@ public partial class User
 
     public string? Email { get; set; }
 
-    public ICollection<Role> Roles { get; set; } = new List<Role>();
+    // public ICollection<Role> Roles { get; set; } = new List<Role>();
+    public ICollection<Role>? Roles { get; set; }
 }
